@@ -16,6 +16,7 @@ try:
 except ImportError:
     HAVE_SSDEEP = False
 
+
 class PyFile(object):
 
     def __init__(self, file_path=None, file_data=None):
@@ -132,6 +133,7 @@ class PyFile(object):
         if file_type is None:
             file_type = ''
         return file_type
+
 
 def main(args=None):
     if args is None:
