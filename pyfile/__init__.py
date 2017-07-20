@@ -114,10 +114,10 @@ class PyFile(object):
             return ''
 
         file_type = self.__get_type_method1()
-        if len(file_type) > 0:
+        if len(file_type) == 0:
             file_type = self.__get_type_method2()
 
-        if len(file_type) > 0:
+        if len(file_type) == 0:
             file_type = self.__get_type_method3()
 
         return file_type
@@ -162,7 +162,8 @@ def main(args=None):
         print("SHA1: {}".format(my_file.get_sha1()))
         print("SHA256: {}".format(my_file.get_sha256()))
         print("SHA512: {}".format(my_file.get_sha512()))
+        print("SSDeep: {}".format(my_file.get_ssdeep()))
 
 
 if __name__ == "__main__":
-    sys.eixt(main())
+    sys.exit(main())
