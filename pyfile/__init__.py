@@ -113,26 +113,41 @@ class PyFile(object):
         if self.file_data is None and self.file_path is None:
             return ''
 
-        file_type = ''
+        file_type = self.__get_type_method1()
+        if len(file_type) > 0:
+            file_type = self.__get_type_method2()
+
+        if len(file_type) > 0:
+            file_type = self.__get_type_method3()
+
+        return file_type
+
+    def __get_type_method1(self):
+        """ Obtem o tipo real do arquivo """
         try:
             ms = magic.open(magic.MAGIC_NONE)
             ms.load()
-            file_type = ms.buffer(self.file_data)
+            return ms.buffer(self.file_data)
         except:
-            try:
-                file_type = magic.from_buffer(self.file_data)
-            except:
-                try:
-                    import subprocess
-                    file_process = subprocess.Popen(['file', '-b',
-                                                     self.file_path],
-                                                    stdout=subprocess.PIPE)
-                    file_type = file_process.stdout.read().strip()
-                except:
-                    return file_type
-        if file_type is None:
-            file_type = ''
-        return file_type
+            return ''
+
+    def __get_type_method2(self):
+        """ Obtem o tipo real do arquivo """
+        try:
+            return magic.from_buffer(self.file_data)
+        except:
+            return ''
+
+    def __get_type_method3(self):
+        """ Obtem o tipo real do arquivo """
+        try:
+            import subprocess
+            file_process = subprocess.Popen(
+                    ['file', '-b', self.file_path],
+                    stdout=subprocess.PIPE)
+            return file_process.stdout.read().strip()
+        except:
+            return ''
 
 
 def main(args=None):
