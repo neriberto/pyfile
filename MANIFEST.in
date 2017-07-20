@@ -2,3 +2,4 @@ recursive-include pyfile *
 include *.md
 include LICENSE
 include tox.ini
+include requirements.txt

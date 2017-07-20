@@ -73,29 +73,15 @@ class PyFile(object):
             res = '%02X%s' % (t, res)
         return res
 
-    def get_md5(self):
-        """ Obtem o hash MD5 do arquivo """
+    def get_hashes(self):
+        """ Obtem os hashes MD5, SHA1, SHA256 e SHA512 do arquivo """
         if self.file_data is None:
             return ''
-        return hashlib.md5(self.file_data).hexdigest()
-
-    def get_sha1(self):
-        """ Obtem o hash SHA1 do arquivo """
-        if self.file_data is None:
-            return ''
-        return hashlib.sha1(self.file_data).hexdigest()
-
-    def get_sha256(self):
-        """ Obtem o hash SHA256 do arquivo """
-        if self.file_data is None:
-            return ''
-        return hashlib.sha256(self.file_data).hexdigest()
-
-    def get_sha512(self):
-        """ Obtem o hash SHA512 do arquivo """
-        if self.file_data is None:
-            return ''
-        return hashlib.sha512(self.file_data).hexdigest()
+        md5 = hashlib.md5(self.file_data).hexdigest()
+        sha1 = hashlib.sha1(self.file_data).hexdigest()
+        sha256 = hashlib.sha256(self.file_data).hexdigest()
+        sha512 = hashlib.sha512(self.file_data).hexdigest()
+        return md5, sha1, sha256, sha512
 
     def get_ssdeep(self):
         """ Obtem o hash SSDEEP do arquivo """
@@ -158,10 +144,11 @@ def main(args=None):
         my_file = PyFile(file_path=sys.argv[1])
         print("True Type: {}".format(my_file.get_type()))
         print("CRC32: {}".format(my_file.get_crc32()))
-        print("MD5: {}".format(my_file.get_md5()))
-        print("SHA1: {}".format(my_file.get_sha1()))
-        print("SHA256: {}".format(my_file.get_sha256()))
-        print("SHA512: {}".format(my_file.get_sha512()))
+        md5, sha1, sha256, sha512 = my_file.get_hashes()
+        print("MD5: {}".format(md5))
+        print("SHA1: {}".format(sha1))
+        print("SHA256: {}".format(sha256))
+        print("SHA512: {}".format(sha512))
         print("SSDeep: {}".format(my_file.get_ssdeep()))
 
 
