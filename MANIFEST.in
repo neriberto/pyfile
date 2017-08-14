@@ -1,4 +1,5 @@
 recursive-include pyfile *
+recursive-include locale *
 include *.md
 include LICENSE
 include tox.ini

@@ -12,9 +12,7 @@ setup(
     description='A file inspector writed in Python',
     entry_points={
         "console_scripts": [
-            "pyfile=pyfile:main",
-            "pyfile%s=pyfile:main" % sys.version[:1],
-            "pyfile%s=pyfile:main" % sys.version[:3],
+            "pyfile=pyfile:main"
         ],
     }
 )
